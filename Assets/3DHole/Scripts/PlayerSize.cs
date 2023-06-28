@@ -24,9 +24,10 @@ public class PlayerSize : MonoBehaviour
 
     private void IncreaseScale()
     {
-        transform.localScale += scaleStep * Vector3.one;
+        // Set the Y component to 0 to ignore scaling on the Y axis
+        Vector3 scaleIncrement = new Vector3(scaleStep, 0f, scaleStep); 
+        transform.localScale += scaleIncrement;
     }
-
     public void CollectibleCollected(float objectSize)
     {
         scaleValue += objectSize;
