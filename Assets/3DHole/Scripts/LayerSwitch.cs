@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class LayerSwitch : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header(" Settings ")]
+    [SerializeField] private string enterLayer;
+    [SerializeField] private string exitLayer;
+
+    private void OnTriggerEnter(Collider other)
     {
-        
+        other.gameObject.layer = LayerMask.NameToLayer(enterLayer);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerExit(Collider other)
     {
-        
+        other.gameObject.layer = LayerMask.NameToLayer(exitLayer);
     }
 }
