@@ -48,6 +48,20 @@ public class PlayerSize : MonoBehaviour
     
     private void UpdateFillDisplay()
     {
-        fillImage.fillAmount = scaleValue / scaleIncreaseThreshold;
+        float targetFillAmount = scaleValue / scaleIncreaseThreshold;
+        
+        /*
+        LeanTween.value(fillImage.fillAmount, targetFillAmount, .2f * Time.deltaTime * 60).
+            setOnUpdate(UpdateFillDisplaySmoothly);
+        */
+
+        // This method is better than the commented
+        LeanTween.value(fillImage.fillAmount, targetFillAmount, .2f * Time.deltaTime * 60).
+            setOnUpdate((value) => fillImage.fillAmount = value);
     }
+    /*
+    private void UpdateFillDisplaySmoothly(float value)
+    {
+        fillImage.fillAmount = value;
+    }*/
 }
