@@ -14,9 +14,12 @@ public class GameManager : MonoBehaviour
     public static Action<GameState> onStateChanged;
 
     // Start is called before the first frame update
-    void Start()
+    IEnumerator Start()
     {
+        yield return null;
+
         gameState = GameState.MENU;
+        onStateChanged?.Invoke(gameState);
     }
 
     // Update is called once per frame
@@ -29,7 +32,6 @@ public class GameManager : MonoBehaviour
     {
         gameState = GameState.GAME;
         onStateChanged?.Invoke(gameState);
-    
     }
 
 }
