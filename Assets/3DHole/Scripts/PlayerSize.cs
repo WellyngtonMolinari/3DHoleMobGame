@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class PlayerSize : MonoBehaviour
 {
@@ -23,6 +24,9 @@ public class PlayerSize : MonoBehaviour
 
     private float scaleValue;
 
+    [Header(" Events ")]
+    public static Action<float> onIncrease;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +46,7 @@ public class PlayerSize : MonoBehaviour
         LeanTween.scale(transform.gameObject, scaleVector, animationTime * Time.deltaTime * 60)
             .setEase(sizeCurve);
 
+        onIncrease?.Invoke(targetScale);
     }
     public void CollectibleCollected(float objectSize)
     {
