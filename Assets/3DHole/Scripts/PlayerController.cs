@@ -13,14 +13,17 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        EnableMovement();
+        //EnableMovement();
 
         PlayerTimer.onTimerOver += DisableMovement;
+
+        GameManager.onStateChanged += GameStateChangedCallback;
     }
 
     private void OnDestroy()
     {
         PlayerTimer.onTimerOver -= DisableMovement;
+        GameManager.onStateChanged -= GameStateChangedCallback;
     }
 
     // Update is called once per frame
@@ -61,6 +64,16 @@ public class PlayerController : MonoBehaviour
             Vector3 TargetPosition = transform.position + difference * moveSpeed * Time.deltaTime;
 
             transform.position = TargetPosition;
+        }
+    }
+
+    private void GameStateChangedCallback(GameState gameState)
+    {
+        switch(gameState)
+        {
+            case GameState.GAME:
+                EnableMovement();
+                break;
         }
     }
 
