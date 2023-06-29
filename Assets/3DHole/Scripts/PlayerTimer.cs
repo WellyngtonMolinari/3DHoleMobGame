@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class PlayerTimer : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class PlayerTimer : MonoBehaviour
 
     private int timer;
     private bool timerIsOn;
+
+    [Header(" Events ")]
+    public static Action onTimerOver;
 
     // Start is called before the first frame update
     void Start()
@@ -40,7 +44,7 @@ public class PlayerTimer : MonoBehaviour
             Debug.LogWarning("A timer is already on");
             return;
         }
-        
+
         Initialize();
 
         timerIsOn = true;
@@ -69,6 +73,7 @@ public class PlayerTimer : MonoBehaviour
     public void StopTimer()
     {
         Debug.Log("Timer is over!");
+        onTimerOver?.Invoke();
     }
 
     private string FormatSeconds(int totalSeconds)

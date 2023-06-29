@@ -8,17 +8,28 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private float screenPositionFollowThreshold;
     private Vector3 clickedScreenPosition;
+    private bool canMove;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        EnableMovement();
+
+        PlayerTimer.onTimerOver += DisableMovement;
+    }
+
+    private void OnDestroy()
+    {
+        PlayerTimer.onTimerOver -= DisableMovement;
     }
 
     // Update is called once per frame
     void Update()
     {
-        ManageControl();
+        if (canMove)
+        {
+            ManageControl();
+        }
     }
 
     private void ManageControl()
@@ -52,4 +63,15 @@ public class PlayerController : MonoBehaviour
             transform.position = TargetPosition;
         }
     }
+
+    private void EnableMovement()
+    {
+        canMove = true;
+    }
+
+    private void DisableMovement()
+    {
+        canMove = false;
+    }
+
 }
