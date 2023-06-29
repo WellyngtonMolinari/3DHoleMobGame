@@ -20,15 +20,29 @@ public class PlayerTimer : MonoBehaviour
     void Start()
     {
         Initialize();
+
+        GameManager.onStateChanged += GameStateChangedCallback;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.onStateChanged -= GameStateChangedCallback;
+    }
+
+    private void GameStateChangedCallback(GameState gameState)
+    {
+        switch(gameState)
+        {
+            case GameState.GAME:
+                StartTimer();
+                break;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StartTimer();
-        }
+
     }
 
     private void Initialize()
