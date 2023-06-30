@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Collectible : MonoBehaviour
 {
-    [Header(" Settings ")]
+    [Header("Settings")]
     [SerializeField] private float size;
+
+    // Specify the coin drop amount for each collectible instance
+    [SerializeField] private int coinDropAmount = 1;
 
     private void Start()
     {
@@ -15,5 +18,10 @@ public class Collectible : MonoBehaviour
     public float GetSize()
     {
         return size;
+    }
+
+    public int GetCoinDropAmount()
+    {
+        return coinDropAmount;
     }
 }

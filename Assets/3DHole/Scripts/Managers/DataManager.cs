@@ -1,17 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
+using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
     public static DataManager instance;
 
-    [Header(" Data ")]
+    [Header("Data")]
     private int coins;
     private const string coinsKey = "Coins";
 
-    [Header(" Events ")]
+    [Header("Events")]
     public static Action onCoinsUpdated;
 
     private void Awake()
@@ -30,8 +28,6 @@ public class DataManager : MonoBehaviour
     void Start()
     {
         LoadData();
-
-        AddCoins(500);
     }
 
     // Update is called once per frame
@@ -62,7 +58,6 @@ public class DataManager : MonoBehaviour
     private void LoadData()
     {
         coins = PlayerPrefs.GetInt(coinsKey);
-
         onCoinsUpdated?.Invoke();
     }
 
