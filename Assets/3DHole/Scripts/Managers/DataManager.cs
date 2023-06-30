@@ -30,12 +30,28 @@ public class DataManager : MonoBehaviour
     void Start()
     {
         LoadData();
+
+        AddCoins(500);
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    public void AddCoins(int amount)
+    {
+        coins += amount;
+        SaveData();
+        onCoinsUpdated?.Invoke();
+    }
+
+    public void Purchase(int price)
+    {
+        coins -= price;
+        SaveData();
+        onCoinsUpdated?.Invoke();
     }
 
     public int GetCoins()

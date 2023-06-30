@@ -61,13 +61,6 @@ public class UpgradesManager : MonoBehaviour
 
     private void InitializeButtons()
     {
-        // A script attached to each upgrade button
-        // Call this script and configure
-        // Upgrade level
-        // 
-
-        UpdateButtonsInteractability();
-
         UpdateButtonsVisuals();
     }
 
@@ -83,31 +76,42 @@ public class UpgradesManager : MonoBehaviour
         timerButton.GetComponent<UpgradeButton>().Configure(timerLevel, GetUpgradePrice(timerLevel));
         sizeButton.GetComponent<UpgradeButton>().Configure(sizeLevel, GetUpgradePrice(sizeLevel));
         powerButton.GetComponent<UpgradeButton>().Configure(powerLevel, GetUpgradePrice(powerLevel));
+        UpdateButtonsInteractability();
     }
 
     public void TimerButtonCallback()
     {
         onTimerPurchased?.Invoke();
 
+        DataManager.instance.Purchase(GetUpgradePrice(timerLevel));
+
         timerLevel++;
-        SaveData();
-        UpdateButtonsVisuals();
+
+        SaveAndUpdateVisuals();
     }
 
     public void SizeButtonCallback()
     {
         onSizePurchased?.Invoke();
 
+        DataManager.instance.Purchase(GetUpgradePrice(sizeLevel));
+
         sizeLevel++;
-        SaveData();
-        UpdateButtonsVisuals();
+        SaveAndUpdateVisuals();
     }
 
     public void PowerButtonCallback()
     {
         onPowerPurchased?.Invoke();
 
+        DataManager.instance.Purchase(GetUpgradePrice(powerLevel));
+
         powerLevel++;
+        SaveAndUpdateVisuals();
+    }
+
+    private void SaveAndUpdateVisuals()
+    {
         SaveData();
         UpdateButtonsVisuals();
     }
