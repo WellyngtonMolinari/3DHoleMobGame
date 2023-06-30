@@ -2,13 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class UIManager : MonoBehaviour
 {
     [Header(" Elements ")]
     [SerializeField] private GameObject menuPanel;
     [SerializeField] private GameObject gamePanel;
-    // Start is called before the first frame update
+    [SerializeField] private GameObject gameOverPanel;
+
+    [Header("Events")]
+    public UnityEvent onRestartScene;
 
     [Header("Coins")]
     [SerializeField] private TextMeshProUGUI menuCoinsText;
@@ -21,12 +26,14 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         GameManager.onStateChanged += GameStateChangedCallback;
+        PlayerTimer.onTimerOver += TimerOverCallback;
     }
 
     private void OnDestroy()
     {
         GameManager.onStateChanged -= GameStateChangedCallback;
         DataManager.onCoinsUpdated -= UpdateCoins;
+        PlayerTimer.onTimerOver -= TimerOverCallback;
     }
     // Update is called once per frame
     void Update()
@@ -60,8 +67,25 @@ public class UIManager : MonoBehaviour
         menuPanel.SetActive(false);
     }
 
+    private void TimerOverCallback()
+    {
+        // Call the GameOver() method
+        GameOver();
+    }
+
+    private void GameOver()
+    {
+        gameOverPanel.SetActive(true);
+    }
+
     private void UpdateCoins()
     {
         menuCoinsText.text = DataManager.instance.GetCoins().ToString();
     }
+
+    public void RestartScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
 }
