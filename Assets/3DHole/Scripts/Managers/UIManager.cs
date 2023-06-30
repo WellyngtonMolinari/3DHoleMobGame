@@ -12,8 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject gamePanel;
     [SerializeField] private GameObject gameOverPanel;
 
-    [Header("Events")]
-    public UnityEvent onRestartScene;
+
 
     [Header("Coins")]
     [SerializeField] private TextMeshProUGUI menuCoinsText;
