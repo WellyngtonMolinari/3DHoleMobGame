@@ -24,6 +24,9 @@ public class PlayerSize : MonoBehaviour
 
     private float scaleValue;
 
+    [Header(" Power ")]
+    private float powerMultiplier;
+
     [Header(" Events ")]
     public static Action<float> onIncrease;
 
@@ -31,6 +34,15 @@ public class PlayerSize : MonoBehaviour
     void Start()
     {
         fillImage.fillAmount = 0;
+
+        UpgradesManager.onSizePurchased += SizePurchasedCallback;
+        UpgradesManager.onPowerPurchased += PowerPurchasedCallback;
+    }
+
+    private void OnDestroy()
+    {
+        UpgradesManager.onSizePurchased -= SizePurchasedCallback;
+        UpgradesManager.onPowerPurchased -= PowerPurchasedCallback;
     }
 
     // Update is called once per frame
@@ -48,9 +60,10 @@ public class PlayerSize : MonoBehaviour
 
         onIncrease?.Invoke(targetScale);
     }
+
     public void CollectibleCollected(float objectSize)
     {
-        scaleValue += objectSize;
+        scaleValue += objectSize * (1 + powerMultiplier);
 
         if (scaleValue >= scaleIncreaseThreshold)
         {
@@ -65,18 +78,18 @@ public class PlayerSize : MonoBehaviour
     {
         float targetFillAmount = scaleValue / scaleIncreaseThreshold;
 
-        /*
-        LeanTween.value(fillImage.fillAmount, targetFillAmount, .2f * Time.deltaTime * 60).
-            setOnUpdate(UpdateFillDisplaySmoothly);
-        */
-
-        // This method is better than the commented
         LeanTween.value(fillImage.fillAmount, targetFillAmount, .2f * Time.deltaTime * 60).
             setOnUpdate((value) => fillImage.fillAmount = value);
     }
-    /*
-    private void UpdateFillDisplaySmoothly(float value)
+
+    private void SizePurchasedCallback()
     {
-        fillImage.fillAmount = value;
-    }*/
+        IncreaseScale();
+    }
+
+    private void PowerPurchasedCallback()
+    {
+        powerMultiplier++;
+    }
+
 }

@@ -60,9 +60,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: Upgrade Title
   m_EditorClassIdentifier: 
-  hashCode: -463520882
+  hashCode: -1231207984
   material: {fileID: 6381392555824777106}
-  materialHashCode: 2105713262
+  materialHashCode: 700550128
   m_Version: 1.1.0
   m_SourceFontFileGUID: 0e84dc3daa2677941a45e081a40c857c
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 0e84dc3daa2677941a45e081a40c857c,
@@ -2817,7 +2817,7 @@ Material:
     - _ColorMask: 15
     - _CullMode: 0
     - _Diffuse: 0.5
-    - _FaceDilate: 0
+    - _FaceDilate: 0.53
     - _FaceUVSpeedX: 0
     - _FaceUVSpeedY: 0
     - _GlowInner: 0.05
@@ -2831,12 +2831,12 @@ Material:
     - _OutlineSoftness: 0
     - _OutlineUVSpeedX: 0
     - _OutlineUVSpeedY: 0
-    - _OutlineWidth: 0
+    - _OutlineWidth: 0.5
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
-    - _ScaleRatioA: 0.9
-    - _ScaleRatioB: 0.73125
-    - _ScaleRatioC: 0.73125
+    - _ScaleRatioA: 0.7392197
+    - _ScaleRatioB: 0.25425005
+    - _ScaleRatioC: 0.25425005
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0
