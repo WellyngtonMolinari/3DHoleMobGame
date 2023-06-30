@@ -31,22 +31,32 @@ public class UpgradesManager : MonoBehaviour
     public static Action onTimerPurchased;
     public static Action onSizePurchased;
     public static Action onPowerPurchased;
+    public static Action<int, int, int> onDataLoaded;
 
     private void Awake()
     {
-        LoadData();
-        InitializeButtons();
+        DataManager.onCoinsUpdated += CoinsUpdateCallback;
     }
     // Start is called before the first frame update
     void Start()
     {
-
+        LoadData();
+        InitializeButtons();
     }
 
+    private void OnDestroy()
+    {
+        DataManager.onCoinsUpdated -= CoinsUpdateCallback;
+    }
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    private void CoinsUpdateCallback()
+    {
+        UpdateButtonsInteractability();
     }
 
     private void InitializeButtons()
@@ -54,9 +64,18 @@ public class UpgradesManager : MonoBehaviour
         // A script attached to each upgrade button
         // Call this script and configure
         // Upgrade level
-        // Interactability
+        // 
+
+        UpdateButtonsInteractability();
 
         UpdateButtonsVisuals();
+    }
+
+    private void UpdateButtonsInteractability()
+    {
+        timerButton.interactable = GetUpgradePrice(timerLevel) <= DataManager.instance.GetCoins();
+        sizeButton.interactable = GetUpgradePrice(sizeLevel) <= DataManager.instance.GetCoins();
+        powerButton.interactable = GetUpgradePrice(powerLevel) <= DataManager.instance.GetCoins();
     }
 
     private void UpdateButtonsVisuals()
@@ -103,6 +122,9 @@ public class UpgradesManager : MonoBehaviour
         timerLevel = PlayerPrefs.GetInt(timerKey);
         sizeLevel = PlayerPrefs.GetInt(sizeKey);
         powerLevel = PlayerPrefs.GetInt(powerKey);
+
+        // Send an event with the different upgrades levels
+        onDataLoaded?.Invoke(timerLevel, sizeLevel, powerLevel);
     }
 
     private void SaveData()

@@ -30,6 +30,10 @@ public class PlayerSize : MonoBehaviour
     [Header(" Events ")]
     public static Action<float> onIncrease;
 
+    private void Awake()
+    {
+        UpgradesManager.onDataLoaded += UpgradesDataLoadedCallback;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +47,7 @@ public class PlayerSize : MonoBehaviour
     {
         UpgradesManager.onSizePurchased -= SizePurchasedCallback;
         UpgradesManager.onPowerPurchased -= PowerPurchasedCallback;
+        UpgradesManager.onDataLoaded -= UpgradesDataLoadedCallback;
     }
 
     // Update is called once per frame
@@ -54,6 +59,11 @@ public class PlayerSize : MonoBehaviour
     private void IncreaseScale()
     {
         float targetScale = transform.localScale.x + scaleStep;
+        UpdateScale(targetScale);
+    }
+
+    private void UpdateScale(float targetScale)
+    {
         Vector3 scaleVector = new Vector3(targetScale, 1f, targetScale);
         LeanTween.scale(transform.gameObject, scaleVector, animationTime * Time.deltaTime * 60)
             .setEase(sizeCurve);
@@ -90,6 +100,14 @@ public class PlayerSize : MonoBehaviour
     private void PowerPurchasedCallback()
     {
         powerMultiplier++;
+    }
+
+    private void UpgradesDataLoadedCallback(int timerLevel, int sizeLevel, int powerLevel)
+    {
+        float targetScale = transform.localScale.x + scaleStep * sizeLevel;
+        UpdateScale(targetScale);
+
+        powerMultiplier = powerLevel;
     }
 
 }

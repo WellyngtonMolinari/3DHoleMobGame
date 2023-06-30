@@ -13,9 +13,16 @@ public class PlayerTimer : MonoBehaviour
     private int timer;
     private bool timerIsOn;
 
+    [Header (" Settings ")]
+    [SerializeField] private int addictionTimePerLevel;
+
     [Header(" Events ")]
     public static Action onTimerOver;
 
+    private void Awake()
+    {
+        UpgradesManager.onDataLoaded += UpgradesDataLoadedCallback;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -31,11 +38,13 @@ public class PlayerTimer : MonoBehaviour
         GameManager.onStateChanged -= GameStateChangedCallback;
 
         UpgradesManager.onTimerPurchased -= TimerPurchasedCallback;
+
+        UpgradesManager.onDataLoaded -= UpgradesDataLoadedCallback;
     }
 
     private void GameStateChangedCallback(GameState gameState)
     {
-        switch(gameState)
+        switch (gameState)
         {
             case GameState.GAME:
                 StartTimer();
@@ -96,7 +105,13 @@ public class PlayerTimer : MonoBehaviour
 
     private void TimerPurchasedCallback()
     {
-        timerDuration += 3;
+        timerDuration += addictionTimePerLevel;
+        Initialize();
+    }
+
+    private void UpgradesDataLoadedCallback(int timerLevel, int sizeLevel, int powerLevel)
+    {
+        timerDuration += addictionTimePerLevel * timerLevel;
         Initialize();
     }
 
