@@ -28,6 +28,8 @@ public class DataManager : MonoBehaviour
     void Start()
     {
         LoadData();
+
+        AddCoins(500);
     }
 
     // Update is called once per frame

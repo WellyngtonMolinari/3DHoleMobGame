@@ -10,10 +10,14 @@ public class PlayerController : MonoBehaviour
     private Vector3 clickedScreenPosition;
     private bool canMove;
 
+    private PlayerSize playerSize;
+
     // Start is called before the first frame update
     void Start()
     {
-        //EnableMovement();
+        playerSize = GetComponent<PlayerSize>();
+
+        playerSize.onIncreaseMoveSpeed += IncreaseMoveSpeed;
 
         PlayerTimer.onTimerOver += DisableMovement;
 
@@ -22,6 +26,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnDestroy()
     {
+        playerSize.onIncreaseMoveSpeed -= IncreaseMoveSpeed;
         PlayerTimer.onTimerOver -= DisableMovement;
         GameManager.onStateChanged -= GameStateChangedCallback;
     }
@@ -33,6 +38,11 @@ public class PlayerController : MonoBehaviour
         {
             ManageControl();
         }
+    }
+
+    private void IncreaseMoveSpeed(float targetScale)
+    {
+        moveSpeed += targetScale / 2; // Adjust the move speed based on the targetScale
     }
 
     private void ManageControl()

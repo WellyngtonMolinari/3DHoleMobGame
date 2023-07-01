@@ -29,6 +29,7 @@ public class PlayerSize : MonoBehaviour
 
     [Header(" Events ")]
     public static Action<float> onIncrease;
+    public Action<float> onIncreaseMoveSpeed;
 
     private void Awake()
     {
@@ -69,6 +70,7 @@ public class PlayerSize : MonoBehaviour
             .setEase(sizeCurve);
 
         onIncrease?.Invoke(targetScale);
+        onIncreaseMoveSpeed?.Invoke(targetScale);
     }
 
     public void CollectibleCollected(float objectSize)
@@ -79,6 +81,8 @@ public class PlayerSize : MonoBehaviour
         {
             IncreaseScale();
             scaleValue = scaleValue % scaleIncreaseThreshold;
+
+            onIncreaseMoveSpeed?.Invoke(transform.localScale.x + scaleStep);
         }
 
         UpdateFillDisplay();
