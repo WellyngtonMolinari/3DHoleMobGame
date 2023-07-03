@@ -8,6 +8,7 @@ public class ZombieMovement : MonoBehaviour
 
     private int currentWaypointIndex = 0;
     private Rigidbody rb;
+    private bool isEnabled = true;
 
     private void Start()
     {
@@ -16,7 +17,7 @@ public class ZombieMovement : MonoBehaviour
 
     private void Update()
     {
-        if (waypoints.Length == 0)
+        if (!isEnabled || waypoints.Length == 0)
             return;
 
         Vector3 targetPosition = waypoints[currentWaypointIndex].position;
@@ -34,8 +35,13 @@ public class ZombieMovement : MonoBehaviour
             if (currentWaypointIndex >= waypoints.Length)
                 currentWaypointIndex = 0;
         }
-        
     }
 
-    
+    private void OnTriggerEnter(Collider other)
+    {
+
+        isEnabled = false;
+        rb.velocity = Vector3.zero;
+    }
+
 }

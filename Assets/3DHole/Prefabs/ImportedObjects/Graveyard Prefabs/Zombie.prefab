@@ -11,22 +11,22 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: cf53d4c50ea41c744ab7a36861da18a3,
         type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 152
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cf53d4c50ea41c744ab7a36861da18a3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -4.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cf53d4c50ea41c744ab7a36861da18a3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.033
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cf53d4c50ea41c744ab7a36861da18a3,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -2.380199
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cf53d4c50ea41c744ab7a36861da18a3,
         type: 3}
@@ -71,7 +71,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: cf53d4c50ea41c744ab7a36861da18a3,
         type: 3}
       propertyPath: m_Name
-      value: Zombie
+      value: Zombie (4)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -93,6 +93,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: -5715113046715482638}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cf53d4c50ea41c744ab7a36861da18a3,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1868958601}
   m_SourcePrefab: {fileID: 100100000, guid: cf53d4c50ea41c744ab7a36861da18a3, type: 3}
 --- !u!1 &217452370965637810 stripped
 GameObject:
@@ -120,8 +124,8 @@ Rigidbody:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
+  m_ImplicitCom: 0
+  m_ImplicitTensor: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -182,3 +186,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &1868958601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217452370965637810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c130905bcd2f2a409b6fafa943fbeb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  movementSpeed: 1
+  rotationSpeed: 2
