@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
     private void IncreaseMoveSpeed(float targetScale)
     {
         // REMOVE TARGETSCALE IF OU DONT WANT TO INCREASE THE SIZE TOO
-        moveSpeed += targetScale / 2; // Adjust the move speed based on the targetScale
+        moveSpeed += targetScale / 10; // Adjust the move speed based on the targetScale
     }
 
     private void ManageControl()
