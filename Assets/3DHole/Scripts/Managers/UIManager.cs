@@ -11,10 +11,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject pausePanel;
 
-    private bool isPaused;
-
-
-
     [Header("Coins")]
     [SerializeField] private TextMeshProUGUI menuCoinsText;
 
@@ -91,14 +87,12 @@ public class UIManager : MonoBehaviour
     public void PauseMenu()
     {
         pausePanel.SetActive(true);
-        isPaused = true;
         Time.timeScale = 0f;
     }
 
     public void UnPause()
     {
         pausePanel.SetActive(false);
-        isPaused = false;
         Time.timeScale = 1f;
     }
 
