@@ -2,12 +2,20 @@ using UnityEngine;
 
 public class EyeController : MonoBehaviour
 {
-    [Header(" Settings ")]
+    [Header("Settings")]
     [SerializeField] private float moveSpeed;
-    private Vector3 clickedScreenPosition;
+    private Vector3 originalPosition;
+    private Vector3 initialMousePosition;
+    private bool isDragging;
+    private Transform faceTransform;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
+    {
+        originalPosition = transform.localPosition;
+        faceTransform = transform.parent;
+    }
+
+    private void Update()
     {
         ManageControl();
     }
@@ -16,31 +24,28 @@ public class EyeController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            clickedScreenPosition = Input.mousePosition;
+            isDragging = true;
+            initialMousePosition = Input.mousePosition;
         }
-        else if (Input.GetMouseButton(0))
+        else if (Input.GetMouseButtonUp(0))
         {
-            // First calculate the difference in screen position
-            Vector3 difference = Input.mousePosition - clickedScreenPosition;
+            isDragging = false;
+        }
 
-            Vector3 direction = difference.normalized;
+        if (isDragging)
+        {
+            Vector3 mouseDelta = (Input.mousePosition - initialMousePosition) / Screen.width;
+            mouseDelta.z = mouseDelta.y;
+            mouseDelta.y = 0f;
 
-            float maxScreenDistance = Screen.height;
+            Vector3 targetPosition = originalPosition + mouseDelta * moveSpeed;
 
-            if (difference.magnitude > maxScreenDistance)
-            {
-                clickedScreenPosition = Input.mousePosition - direction * maxScreenDistance;
-                difference = Input.mousePosition - clickedScreenPosition;
-            }
-
-            difference /= Screen.width;
-
-            difference.z = difference.y;
-            difference.y = 0;
-
-            Vector3 TargetPosition = transform.position + difference * moveSpeed * Time.deltaTime;
-
-            transform.position = TargetPosition;
+            transform.localPosition = targetPosition;
+        }
+        else
+        {
+            Vector3 targetPosition = originalPosition;
+            transform.localPosition = Vector3.Lerp(transform.localPosition, targetPosition, moveSpeed * Time.deltaTime);
         }
     }
 }
