@@ -39,6 +39,10 @@ public class EyeController : MonoBehaviour
             mouseDelta.z = mouseDelta.y;
             mouseDelta.y = 0f;
 
+            // Adjust mouseDelta based on the rotation of the face
+            Quaternion faceRotation = faceTransform.rotation;
+            mouseDelta = Quaternion.Inverse(faceRotation) * mouseDelta;
+
             Vector3 targetPosition = originalPosition + mouseDelta * moveSpeed * sensitivity;
 
             transform.localPosition = targetPosition;
