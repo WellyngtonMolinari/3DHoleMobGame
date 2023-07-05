@@ -90,10 +90,16 @@ public class PlayerSize : MonoBehaviour
 
     private void UpdateFillDisplay()
     {
+        if (fillImage == null)
+        {
+            Debug.LogError("fillImage is null!");
+            return;
+        }
+
         float targetFillAmount = scaleValue / scaleIncreaseThreshold;
 
-        LeanTween.value(fillImage.fillAmount, targetFillAmount, .2f * Time.deltaTime * 60).
-            setOnUpdate((value) => fillImage.fillAmount = value);
+        LeanTween.value(fillImage.fillAmount, targetFillAmount, .2f * Time.deltaTime * 60)
+            .setOnUpdate((value) => fillImage.fillAmount = value);
     }
 
     private void SizePurchasedCallback()

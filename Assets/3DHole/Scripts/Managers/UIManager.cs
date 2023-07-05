@@ -9,6 +9,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject menuPanel;
     [SerializeField] private GameObject gamePanel;
     [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private GameObject pausePanel;
+
+    private bool isPaused;
 
 
 
@@ -83,6 +86,20 @@ public class UIManager : MonoBehaviour
     public void RestartScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void PauseMenu()
+    {
+        pausePanel.SetActive(true);
+        isPaused = true;
+        Time.timeScale = 0f;
+    }
+
+    public void UnPause()
+    {
+        pausePanel.SetActive(false);
+        isPaused = false;
+        Time.timeScale = 1f;
     }
 
 }
