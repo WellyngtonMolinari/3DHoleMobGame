@@ -3,7 +3,8 @@ using UnityEngine;
 public class EyeController : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] private float moveSpeed;
+    [SerializeField] private float moveSpeed = 1f;
+    [SerializeField] private float sensitivity = 1f;
     private Vector3 originalPosition;
     private Vector3 initialMousePosition;
     private bool isDragging;
@@ -38,7 +39,7 @@ public class EyeController : MonoBehaviour
             mouseDelta.z = mouseDelta.y;
             mouseDelta.y = 0f;
 
-            Vector3 targetPosition = originalPosition + mouseDelta * moveSpeed;
+            Vector3 targetPosition = originalPosition + mouseDelta * moveSpeed * sensitivity;
 
             transform.localPosition = targetPosition;
         }
