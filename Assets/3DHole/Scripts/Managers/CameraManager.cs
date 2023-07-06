@@ -2,20 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
-using UnityEditor;
-using UnityEditor.SceneManagement;
 
-[InitializeOnLoad]
 public class CameraManager : MonoBehaviour
 {
     [Header("Elements")]
-    [SerializeField] private CinemachineVirtualCamera playerCamera;
+    public CinemachineVirtualCamera playerCamera;
 
     [Header("Settings")]
     [SerializeField] private float minDistance;
     [SerializeField] private float distanceMultiplier;
 
-    private Vector3 originalFollowOffset;
+    public Vector3 originalFollowOffset;
 
     private void Start()
     {
@@ -43,9 +40,9 @@ public class CameraManager : MonoBehaviour
     }
 
     // Reset the camera's m_FollowOffset value when leaving play mode
-    static CameraManager()
+    /*static CameraManager()
     {
-        EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
+        UnityEditor.EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
     }
 
     private static void OnPlayModeStateChanged(PlayModeStateChange state)
@@ -58,5 +55,7 @@ public class CameraManager : MonoBehaviour
                 cameraManager.playerCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = cameraManager.originalFollowOffset;
             }
         }
-    }
+    }*/
+
+
 }
