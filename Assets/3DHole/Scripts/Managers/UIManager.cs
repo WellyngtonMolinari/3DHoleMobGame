@@ -59,7 +59,7 @@ public class UIManager : MonoBehaviour
 
     private void SetGame()
     {
-        SFXManager.instance.PlaySFXPitched(1);
+        SFXManager.instance.PlaySFXPitched(3);
         gamePanel.SetActive(true);
         menuPanel.SetActive(false);
     }
