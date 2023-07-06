@@ -83,7 +83,11 @@ public class PlayerSize : MonoBehaviour
             scaleValue = scaleValue % scaleIncreaseThreshold;
 
             onIncreaseMoveSpeed?.Invoke(transform.localScale.x + scaleStep);
+
+            SFXManager.instance.PlaySFXPitched(2);
         }
+
+        SFXManager.instance.PlaySFXPitched(0);
 
         UpdateFillDisplay();
     }
