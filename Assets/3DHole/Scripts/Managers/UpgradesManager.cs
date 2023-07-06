@@ -81,6 +81,7 @@ public class UpgradesManager : MonoBehaviour
 
     public void TimerButtonCallback()
     {
+        SFXManager.instance.PlaySFXPitched(1);
         onTimerPurchased?.Invoke();
 
         DataManager.instance.Purchase(GetUpgradePrice(timerLevel));
@@ -92,6 +93,7 @@ public class UpgradesManager : MonoBehaviour
 
     public void SizeButtonCallback()
     {
+        SFXManager.instance.PlaySFXPitched(1);
         onSizePurchased?.Invoke();
 
         DataManager.instance.Purchase(GetUpgradePrice(sizeLevel));
@@ -102,6 +104,7 @@ public class UpgradesManager : MonoBehaviour
 
     public void PowerButtonCallback()
     {
+        SFXManager.instance.PlaySFXPitched(1);
         onPowerPurchased?.Invoke();
 
         DataManager.instance.Purchase(GetUpgradePrice(powerLevel));
